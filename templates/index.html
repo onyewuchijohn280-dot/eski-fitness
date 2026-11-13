@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ESKI FITNESS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #101820;
+            color: white;
+        }
+
+        header {
+            background: #00c853;
+            color: #101820;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 25px;
+            background: #1c2935;
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: #00c853;
+            color: #101820;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00e676;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #263b46;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+
+        .error {
+            color: #ff7777;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ESKI FITNESS</h1>
+    <p>Your Health and Fitness Guide</p>
+</header>
+
+<div class="container">
+
+    <h2>Welcome to ESKI FITNESS</h2>
+
+    <p>Enter your details to get your fitness guide.</p>
+
+    <form method="POST">
+
+        <label>Your Name</label>
+        <input
+            type="text"
+            name="fname"
+            placeholder="Enter your name"
+            required
+        >
+
+        <label>Year of Birth</label>
+        <input
+            type="number"
+            name="dob"
+            placeholder="e.g. 2005"
+            min="1900"
+            required
+        >
+
+        <label>Weight (kg)</label>
+        <input
+            type="number"
+            name="weight"
+            placeholder="Enter your weight"
+            min="1"
+            step="0.1"
+            required
+        >
+
+        <button type="submit">
+            Generate My Fitness Guide
+        </button>
+
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+
+        <div class="result">
+
+            <h2>Hello, {{ result.name }}!</h2>
+
+            <p>
+                Your estimated age is {{ result.age }} years.
+            </p>
+
+            <p>
+                Your entered weight is {{ result.weight }} kg.
+            </p>
+
+            <h3>Your Fitness Guide</h3>
+
+            <ul>
+                {% for item in result.plan %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+
+            <p>
+                Thank you for choosing ESKI FITNESS
+                as your health and fitness guide!
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<footer>
+    &copy; 2026 ESKI FITNESS. All rights reserved.
+</footer>
+
+</body>
+</html>
